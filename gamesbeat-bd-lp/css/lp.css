@@ -1,5 +1,4 @@
-/* css/lp.css (v=1.2)
-   Strong overrides because style.css has many global rules
+/* css/lp.css (v=1.5)
    Scoped under .top-page.lp-page so it only affects the LP
 */
 
@@ -22,17 +21,155 @@ body{
   background: var(--lp-bg1) !important;
 }
 
+/* =========================================================
+   PAGE BACKGROUND (gamebeats2.png) — BIGGER / MORE VISIBLE
+   ========================================================= */
 .top-page.lp-page{
   min-height: 100vh !important;
   display: flex !important;
   flex-direction: column !important;
-  background:
+
+  /* show more of the image (less "cropped" feeling) */
+  background-image:
+    linear-gradient(180deg, rgba(5,8,21,.40) 0%, rgba(5,8,21,.78) 100%),
     radial-gradient(1100px 600px at 70% 35%, rgba(13,229,249,.16) 0%, rgba(13,229,249,0) 60%),
     radial-gradient(900px 560px at 90% 10%, rgba(255,4,192,.16) 0%, rgba(255,4,192,0) 60%),
-    linear-gradient(180deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.60) 100%) !important;
+    url("../images/gamebeats2.png") !important;
+
+  background-repeat: no-repeat !important;
+  background-position: center top !important; /* shows more "top" area like your screenshot */
+  background-size: cover !important;
+
+  /* makes it feel taller / more immersive on large screens */
+  background-attachment: fixed;
 }
 
-/* HERO should fill the screen nicely (fixes “big empty area”) */
+/* If iOS Safari acts weird with fixed backgrounds, it will just ignore it. */
+
+/* =========================================================
+   HERO — make the BG feel LONGER
+   ========================================================= */
+.top-page.lp-page .lp-hero{
+  flex: 1 1 auto !important;
+  display: flex !important;
+  align-items: center !important;
+
+  /* IMPORTANT: ensure hero is tall on desktop so background feels "long" */
+  min-height: calc(100vh - 120px) !important; /* subtract approx header height */
+  padding: 56px 0 56px !important;
+
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* your dot overlay is fine, just reduce opacity a bit */
+.top-page.lp-page .lp-hero::before{
+  content:"";
+  position:absolute;
+  inset: 0;
+  background: radial-gradient(rgba(255,255,255,.10) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity:.08;
+  pointer-events:none;
+}
+
+/* =========================================================
+   OPTIONAL: make foreground pop + better "gaming" depth
+   ========================================================= */
+.top-page.lp-page .lp-card{
+  backdrop-filter: blur(2px);
+}
+
+.top-page.lp-page .lp-feature__frame{
+  border: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow: 0 22px 55px rgba(0,0,0,.45) !important;
+}
+
+/* Responsive tweak: on smaller devices don't force huge height */
+@media (max-width: 991px){
+  .top-page.lp-page{
+    background-attachment: scroll;
+    background-position: center center !important;
+  }
+  .top-page.lp-page .lp-hero{
+    min-height: auto !important;
+    padding: 28px 0 22px !important;
+  }
+}
+
+
+/* =========================================================
+   HEADER (match portal gradient bar)
+   ========================================================= */
+.top-page.lp-page .lp-header{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1100 !important;
+
+  /* solid gradient bar like your other pages */
+  background: linear-gradient(90deg, var(--lp-cyan) 0%, var(--lp-pink) 100%) !important;
+
+  /* keep it clean over the background image */
+  box-shadow: 0 10px 26px rgba(0,0,0,.25) !important;
+}
+
+/* if .header-white adds its own bg, force transparent inside */
+.top-page.lp-page .lp-header .navbar{
+  margin: 0 !important;
+}
+
+/* Align nav items like the portal */
+.top-page.lp-page .lp-logo{
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.top-page.lp-page .lp-nav .nav-link{
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 14px !important;
+
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  letter-spacing: .02em !important;
+  color: rgba(255,255,255,.92) !important;
+  text-transform: uppercase !important;
+
+  opacity: 1 !important;
+}
+
+.top-page.lp-page .lp-nav .nav-link:hover{
+  color: #fff !important;
+  filter: brightness(1.06) !important;
+}
+
+.top-page.lp-page .lp-nav .nav-link img{
+  filter: brightness(0) invert(1) !important; /* make icons white to match portal */
+  opacity: .9 !important;
+}
+
+/* My account pill */
+.top-page.lp-page .lp-account{
+  background: rgba(0,0,0,.85) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  padding: 12px 18px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.25) !important;
+}
+
+.top-page.lp-page .lp-account:hover{
+  filter: brightness(1.05) !important;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
 .top-page.lp-page .lp-hero{
   flex: 1 1 auto !important;
   display: flex !important;
@@ -42,22 +179,26 @@ body{
   overflow: hidden !important;
 }
 
+/* subtle dots overlay in hero only */
 .top-page.lp-page .lp-hero::before{
   content:"";
   position:absolute;
-  left:0; right:0;
-  top: 90px;
-  bottom: 0;
-  background: url("../images/backgrounds/Dotted Wave.svg") center top / 900px auto no-repeat;
-  opacity: .20;
+  inset: 0;
+  background: radial-gradient(rgba(255,255,255,.10) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity:.10;
   pointer-events:none;
 }
 
 .top-page.lp-page .lp-hero-row{
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
-/* Card */
+/* =========================================================
+   CARD
+   ========================================================= */
 .top-page.lp-page .lp-card{
   background: var(--lp-card-bg) !important;
   color: var(--lp-card-text) !important;
@@ -66,7 +207,6 @@ body{
   border: 1px solid rgba(0,0,0,.12) !important;
   padding: 28px 24px !important;
   max-width: 560px !important;
-  margin: 0 !important;
 }
 
 .top-page.lp-page .lp-title{
@@ -75,132 +215,20 @@ body{
   font-size: 48px !important;
   line-height: .95 !important;
   margin: 0 0 12px !important;
-  color: #444 !important;
+  color: #333 !important;
 }
 
 .top-page.lp-page .lp-sub{
   margin: 0 0 14px !important;
-  color: rgba(0,0,0,.62) !important;
+  color: rgba(0,0,0,.65) !important;
   line-height: 1.55 !important;
   font-size: 14px !important;
   max-width: 55ch !important;
 }
 
-/* Plans */
-.top-page.lp-page .lp-plans{
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 10px !important;
-  margin: 14px 0 12px !important;
-}
-
-.top-page.lp-page .lp-plan{
-  text-align: left !important;
-  width: 100% !important;
-  background: rgba(255,255,255,.55) !important;
-  border: 1px solid rgba(0,0,0,.10) !important;
-  border-radius: 16px !important;
-  padding: 14px 14px 12px !important;
-  cursor: pointer !important;
-  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease !important;
-  box-shadow: 0 10px 22px rgba(0,0,0,.12) !important;
-}
-
-.top-page.lp-page .lp-plan:hover{
-  transform: translateY(-1px) !important;
-  box-shadow: 0 14px 28px rgba(0,0,0,.16) !important;
-}
-
-.top-page.lp-page .lp-plan.is-selected{
-  border-color: rgba(255,4,192,.55) !important;
-  box-shadow: 0 18px 36px rgba(255,4,192,.10), 0 14px 28px rgba(0,0,0,.16) !important;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.58) 100%) !important;
-  position: relative !important;
-}
-
-.top-page.lp-page .lp-plan.is-selected::after{
-  content:"";
-  position:absolute;
-  inset: -1px;
-  border-radius: 16px;
-  pointer-events:none;
-  background: linear-gradient(90deg, rgba(13,229,249,.40), rgba(255,4,192,.40));
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 1px;
-}
-
-.top-page.lp-page .lp-plan__top{
-  display:flex !important;
-  align-items:center !important;
-  gap: 10px !important;
-}
-
-.top-page.lp-page .lp-plan__name{
-  font-weight: 700 !important;
-  color:#333 !important;
-  font-size: 14px !important;
-}
-
-.top-page.lp-page .lp-plan__badge{
-  margin-left:auto !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  padding: 6px 10px !important;
-  border-radius: 999px !important;
-  color:#fff !important;
-  background: linear-gradient(90deg, var(--lp-cyan) 0%, var(--lp-pink) 100%) !important;
-  box-shadow: 0 8px 18px rgba(0,0,0,.12) !important;
-  white-space: nowrap !important;
-}
-
-.top-page.lp-page .lp-plan__badge--alt{
-  background: rgba(0,0,0,.78) !important;
-}
-
-.top-page.lp-page .lp-plan__badge--pro{
-  background: linear-gradient(90deg, rgba(0,0,0,.86) 0%, rgba(126,124,222,.92) 100%) !important;
-}
-
-.top-page.lp-page .lp-plan__price{
-  margin-top: 10px !important;
-  font-family: "Bangers", sans-serif !important;
-  letter-spacing: .5px !important;
-  font-size: 26px !important;
-  color:#333 !important;
-}
-
-.top-page.lp-page .lp-plan__per{
-  font-family: "Poppins", sans-serif !important;
-  font-weight: 600 !important;
-  font-size: 12px !important;
-  letter-spacing: 0 !important;
-  color: rgba(0,0,0,.55) !important;
-  margin-left: 6px !important;
-}
-
-.top-page.lp-page .lp-plan__meta{
-  margin-top: 6px !important;
-  font-size: 12px !important;
-  color: rgba(0,0,0,.55) !important;
-}
-
-/* Plan summary line */
-.top-page.lp-page .lp-plan-summary{
-  margin: 8px 0 6px !important;
-  font-size: 12px !important;
-  color: rgba(0,0,0,.65) !important;
-}
-.top-page.lp-page .lp-dot{
-  margin: 0 6px !important;
-  opacity: .6 !important;
-}
-
-/* Input + CTA */
+/* =========================================================
+   INPUT + CTA
+   ========================================================= */
 .top-page.lp-page .lp-input-wrap{
   margin: 10px 0 14px !important;
 }
@@ -223,7 +251,7 @@ body{
 
 .top-page.lp-page .lp-btn{
   height: 56px !important;
-  width: 100% !important; /* better conversion */
+  width: 100% !important;
   border-radius: var(--lp-pill) !important;
   border: none !important;
   cursor: pointer !important;
@@ -235,20 +263,20 @@ body{
   letter-spacing: 1px !important;
   font-size: 22px !important;
   color:#fff !important;
-  background: linear-gradient(90deg, var(--lp-cyan) 0%, var(--lp-pink) 100%) !important;
-  box-shadow: 0 10px 22px rgba(0,0,0,.25) !important;
+  background: linear-gradient(90deg, var(--lp-cyan), var(--lp-pink)) !important;
+  box-shadow: 0 12px 26px rgba(0,0,0,.30) !important;
   transition: transform .12s ease, filter .12s ease !important;
 }
 
-.top-page.lp-page .lp-btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
-.top-page.lp-page .lp-btn:active{ transform: translateY(0px); }
+.top-page.lp-page .lp-btn:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+.top-page.lp-page .lp-btn:active{ transform: translateY(0); }
 
 .top-page.lp-page .lp-status{
   margin-top: 12px !important;
   font-size: 13px !important;
   min-height: 18px !important;
-  color: rgba(0,0,0,.60) !important;
 }
+
 .top-page.lp-page .lp-status.is-ok{ color: #127a3a !important; }
 .top-page.lp-page .lp-status.is-err{ color: #b11616 !important; }
 
@@ -257,6 +285,7 @@ body{
   font-size: 12px !important;
   color: rgba(0,0,0,.55) !important;
 }
+
 .top-page.lp-page .lp-terms a{
   color: var(--lp-pink) !important;
   font-weight: 600 !important;
@@ -264,53 +293,99 @@ body{
 }
 .top-page.lp-page .lp-terms a:hover{ text-decoration: underline !important; }
 
-/* Right panel */
-.top-page.lp-page .lp-art{
-  width: 100%;
+/* =========================================================
+   FEATURED PANEL (foreground images)
+   ========================================================= */
+.top-page.lp-page .lp-feature{
+  width: 100% !important;
+}
+
+.top-page.lp-page .lp-feature__frame{
+  width: 100% !important;
   min-height: 440px !important;
   border-radius: var(--lp-radius-lg) !important;
   position: relative !important;
   overflow: hidden !important;
   box-shadow: var(--lp-shadow) !important;
-  background:
-    radial-gradient(640px 460px at 72% 35%, rgba(255,4,192,.35) 0%, rgba(255,4,192,0) 60%),
-    radial-gradient(560px 420px at 35% 72%, rgba(13,229,249,.35) 0%, rgba(13,229,249,0) 60%),
-    linear-gradient(135deg, #0b1238 0%, #090c20 45%, #050815 100%) !important;
+  background: linear-gradient(135deg, rgba(11,18,56,.65), rgba(5,8,21,.85)) !important;
 }
 
-.top-page.lp-page .lp-art::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image: radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
-  background-size: 18px 18px;
-  opacity:.22;
+.top-page.lp-page .lp-feature__img{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 0 !important;
+  transform: scale(1.03) !important;
+  transition: opacity .4s ease, transform .7s ease !important;
 }
 
-/* Footer spacing */
+.top-page.lp-page .lp-feature__img.is-active{
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* dots */
+.top-page.lp-page .lp-feature__dots{
+  display: flex !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin-top: 12px !important;
+}
+
+.top-page.lp-page .lp-dot{
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+  cursor: pointer !important;
+  background: rgba(255,255,255,.35) !important;
+  box-shadow: 0 6px 14px rgba(0,0,0,.25) !important;
+}
+
+.top-page.lp-page .lp-dot.is-active{
+  background: linear-gradient(90deg, var(--lp-cyan), var(--lp-pink)) !important;
+}
+
+.top-page.lp-page .lp-feature__copy{
+  margin-top: 10px !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  color: rgba(255,255,255,.75) !important;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 .top-page.lp-page footer.content{
   margin-top: 0 !important;
 }
 
-/* Responsive */
+.top-page.lp-page .lp-footer{
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 @media (max-width: 991px){
   .top-page.lp-page .lp-hero{
     padding: 28px 0 22px !important;
-    align-items: stretch !important;
   }
   .top-page.lp-page .lp-card{
     max-width: 100% !important;
   }
-  .top-page.lp-page .lp-art{
+  .top-page.lp-page .lp-feature__frame{
     min-height: 320px !important;
   }
   .top-page.lp-page .lp-title{
     font-size: 40px !important;
   }
-}
 
-@media (min-width: 992px){
-  .top-page.lp-page .lp-plans{
-    grid-template-columns: 1fr !important; /* keep it clean, 3 stacked */
+  /* keep header readable on mobile */
+  .top-page.lp-page .lp-header{
+    box-shadow: 0 8px 18px rgba(0,0,0,.22) !important;
   }
 }
