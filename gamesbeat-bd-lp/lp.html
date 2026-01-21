@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css?v=3.6" />
     <!-- LP-specific styles (IMPORTANT: keep this last) -->
-    <link rel="stylesheet" href="css/lp.css?v=1.4" />
+    <link rel="stylesheet" href="css/lp.css?v=1.8" />
 
     <link rel="icon" href="favicon.ico?v3" />
 
@@ -26,136 +26,42 @@
   </head>
 
   <body class="lp-only">
-    <!-- Background image is applied via lp.css to .top-page.lp-page using --lp-bg-img -->
-    <div
-      class="top-page lp-page"
-      style="--lp-bg-img: url('images/gamebeats2.png')"
-    >
-      <!-- Header copied to match portal -->
-      <header class="sticky-top header-white lp-header">
+    <!-- PRELANDER ONLY: no portal header/menu, no portal footer -->
+    <div class="top-page lp-page">
+      <main class="lp-hero">
         <div class="container">
-          <nav
-            id="navbar"
-            class="navbar navbar-expand-xl navbar-dark pt-xl-3 pb-xl-3 pt-2 pb-2 mt-xl-3 mb-xl-3"
-          >
-            <a href="/" class="logo">
+          <!-- ✅ top row spans BOTH columns so left/right align perfectly -->
+          <div class="lp-topbar">
+            <a class="lp-topbar__brand" href="/" aria-label="GamesBeat home">
               <img
                 src="images/Logo Header.png"
-                width="120"
-                class="img-fluid"
-                alt="Gamesbeat"
+                alt="GamesBeat"
+                class="lp-brand__logo"
+                width="140"
+                height="auto"
+                loading="eager"
               />
             </a>
 
-            <a
-              href="login.html"
-              class="mobile-myaccount btn btn-rounded btn-outline-light ml-auto mr-lg-0 ml-auto d-inline-block d-xl-none"
-              aria-label="My account"
-            >
-              <span class="icon-account mr-xl-2" aria-hidden="true"></span>
-            </a>
-
-            <button
-              class="navbar-toggler ml-3"
-              type="button"
-              data-toggle="collapse"
-              data-target="#principal"
-              aria-controls="principal"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-              id="menu-principal"
-            >
-              <span class="navbar-toggler-icon"></span>
-              <span class="navbar-toggler-icon"></span>
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="navbar-collapse collapse ml-lg-auto" id="principal">
-              <ul
-                class="navbar-nav ml-auto mt-lg-0 mt-3 mb-3 mb-lg-0 flex-lg-row justify-content-lg-center"
-              >
-                <li class="nav-item">
-                  <a class="nav-link" href="adventures.html">
-                    <img
-                      src="images/category-icons/Adventures Icon.svg"
-                      height="25"
-                      class="mb-0 icon"
-                      alt=""
-                    />
-                    Adventures
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="arcade.html">
-                    <img
-                      src="images/category-icons/Arcade Icon.svg"
-                      height="25"
-                      class="mb-0 icon"
-                      alt=""
-                    />
-                    Arcade
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="strategy.html">
-                    <img
-                      src="images/category-icons/Strategy Icon.svg"
-                      height="25"
-                      class="mb-0 icon"
-                      alt=""
-                    />
-                    Strategy
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="braintraining.html">
-                    <img
-                      src="images/category-icons/Brainstraining Icon.svg"
-                      height="25"
-                      class="mb-0 icon"
-                      alt=""
-                    />
-                    Braintraining
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link" href="sports.html">
-                    <img
-                      src="images/category-icons/Sports Icon.svg"
-                      height="25"
-                      class="mb-0 icon"
-                      alt=""
-                    />
-                    Sports
-                  </a>
-                </li>
-              </ul>
+            <div class="lp-topbar__lang">
+              <label class="sr-only" for="lang">Language</label>
+              <select id="lang" class="lp-lang" aria-label="Language">
+                <option value="en">English</option>
+                <option value="bn">বাংলা</option>
+              </select>
             </div>
+          </div>
 
-            <a
-              href="login.html"
-              class="desktop-myaccount btn btn-rounded ml-lg-3 mr-lg-0 ml-auto d-none d-xl-inline-block"
-            >
-              <span class="icon-account mr-xl-2" aria-hidden="true"></span>
-              <span class="mr-xl-2">My account</span>
-            </a>
-          </nav>
-        </div>
-      </header>
+          <!-- ✅ align items at TOP so feature + card start same baseline -->
+          <div class="row lp-hero-row align-items-start">
+            <!-- Left: CTA card -->
+            <div class="col-lg-5 order-2 order-lg-1 d-flex">
+              <div class="lp-card w-100">
+                <h1 class="lp-title" data-i18n="title">Subscribe &amp; Play</h1>
 
-      <!-- LP Hero -->
-      <main class="lp-hero">
-        <div class="container">
-          <div class="row align-items-center lp-hero-row">
-            <div class="col-lg-6 order-2 order-lg-1">
-              <div class="lp-card">
-                <h1 class="lp-title">Subscribe &amp; Play</h1>
-
-                <p class="lp-sub">Enter your mobile number to start playing.</p>
+                <p class="lp-sub" data-i18n="subtitle">
+                  Enter your mobile number to get an OTP and start playing.
+                </p>
 
                 <div class="lp-form">
                   <div class="lp-input-wrap">
@@ -164,100 +70,72 @@
                       type="tel"
                       inputmode="tel"
                       class="lp-input"
-                      placeholder="e.g. +8801XXXXXXXXX"
+                      placeholder="e.g. 01XXXXXXXXX"
                       autocomplete="tel"
+                      data-i18n-placeholder="msisdn_placeholder"
                     />
                   </div>
 
-                  <button id="cta" class="lp-btn" type="button">Get OTP</button>
+                  <button id="cta" class="lp-btn" type="button" data-i18n="cta">
+                    Get OTP
+                  </button>
 
                   <div id="status" class="lp-status" aria-live="polite"></div>
 
+                  <p class="lp-price" aria-label="Price notice">
+                    <span data-i18n="price_prefix">BDT</span>
+                    <span class="lp-price__val">3.45</span>
+                    <span data-i18n="price_suffix">/ day (auto-renew)</span>
+                  </p>
+
                   <p class="lp-terms">
-                    By continuing you agree to the subscription terms.
-                    <a href="tyc.html">Terms &amp; Conditions</a>
+                    <span data-i18n="terms_prefix">
+                      By continuing you agree to the subscription terms.
+                    </span>
+                    <a href="tyc.html" data-i18n="terms_link">Terms &amp; Conditions</a>
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="col-lg-6 order-1 order-lg-2">
-              <!-- Featured image panel (gamebeats1 + gamebeats3) -->
-              <section class="lp-feature" aria-label="GamesBeat featured games">
-                <div class="lp-feature__frame">
+            <!-- Right: feature / carousel -->
+            <div class="col-lg-7 order-1 order-lg-2 d-flex">
+              <section class="lp-feature w-100" aria-label="GamesBeat featured games">
+                <!-- ✅ give it a fixed-ish height so image won’t look “cut” -->
+                <div class="lp-feature__frame lp-feature__frame--fixed">
                   <img
                     class="lp-feature__img is-active"
                     src="images/gamebeats1.png"
-                    alt="GamesBeat featured games 1"
+                    alt="GamesBeat featured games"
                     loading="eager"
                   />
                   <img
                     class="lp-feature__img"
                     src="images/gamebeats3.png"
-                    alt="GamesBeat featured games 3"
+                    alt="GamesBeat game preview"
                     loading="lazy"
                   />
                 </div>
 
-                <div
-                  class="lp-feature__dots"
-                  role="tablist"
-                  aria-label="Featured images"
-                >
-                  <button
-                    class="lp-dot is-active"
-                    type="button"
-                    aria-label="Show image 1"
-                  ></button>
-                  <button
-                    class="lp-dot"
-                    type="button"
-                    aria-label="Show image 2"
-                  ></button>
+                <div class="lp-feature__dots" role="tablist" aria-label="Featured images">
+                  <button class="lp-dot is-active" type="button" aria-label="Show image 1"></button>
+                  <button class="lp-dot" type="button" aria-label="Show image 2"></button>
                 </div>
 
-                <p class="lp-feature__copy">
-                  Hundreds of games across Arcade, Strategy, Adventures &amp;
-                  more.
+                <p class="lp-feature__copy" data-i18n="feature_copy">
+                  Play hundreds of games instantly — Arcade, Strategy, Adventures &amp; more.
                 </p>
               </section>
             </div>
           </div>
+
+          <div class="lp-mini-footer">
+            <a href="tyc.html" data-i18n="footer_terms">All Rights Reserved</a>
+            <span class="lp-mini-footer__dot">•</span>
+            <span data-i18n="footer_copy">© 2026 GamesBeat</span>
+          </div>
         </div>
       </main>
-
-      <!-- Footer -->
-      <footer class="container-fluid text-white content pt-3 pb-0 lp-footer">
-        <div class="container">
-          <div class="row align-items-start">
-            <div class="col-md-6 order-md-2 text-md-right">
-              <img src="images/Footer Logo.png" alt="Gamesbeat" />
-            </div>
-
-            <div class="col-md-3 order-md-1">
-              <ul>
-                <li><a href="adventures.html">ADVENTURES</a></li>
-                <li><a href="arcade.html">ARCADE</a></li>
-                <li><a href="strategy.html">STRATEGY</a></li>
-                <li><a href="braintraining.html">BRAINTRAINING</a></li>
-                <li><a href="sports.html">SPORTS</a></li>
-              </ul>
-            </div>
-
-            <div class="col-md-3 order-md-1"></div>
-          </div>
-
-          <!-- Bottom bar -->
-          <div class="row align-items-center py-3">
-            <div class="col-md-8 text-center text-md-left">
-              <p class="mb-0">© Copyright 2025 - All Rights Reserved</p>
-            </div>
-            <div class="col-md-4 text-center text-md-right">
-              <a href="tyc.html" style="color: #666">Terms &amp; Conditions</a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
 
     <!-- JS (match index.html format) -->
@@ -278,40 +156,125 @@
       const msisdnInput = document.getElementById("msisdn");
       const statusEl = document.getElementById("status");
       const cta = document.getElementById("cta");
+      const langSel = document.getElementById("lang");
+
+      // i18n strings (EN + BN)
+      const I18N = {
+        en: {
+          title: "Subscribe &amp; Play",
+          subtitle: "Enter your mobile number to get an OTP and start playing.",
+          msisdn_placeholder: "e.g. 01XXXXXXXXX",
+          cta: "Get OTP",
+          price_prefix: "BDT",
+          price_suffix: "/ day (auto-renew)",
+          terms_prefix: "By continuing you agree to the subscription terms.",
+          terms_link: "Terms &amp; Conditions",
+          feature_copy: "Play hundreds of games instantly — Arcade, Strategy, Adventures &amp; more.",
+          footer_terms: "All Rights Reserved",
+          footer_copy: "© 2025 GamesBeat",
+
+          // status messages
+          status_detected: "Detected number automatically.",
+          status_enter: "Please enter your phone number.",
+          status_sending: "Sending OTP…",
+          status_sent: "OTP sent. Redirecting…",
+          status_fail: "Could not send OTP. Please try again."
+        },
+        bn: {
+          title: "সাবস্ক্রাইব করুন &amp; খেলুন",
+          subtitle: "ওটিপি পেতে এবং খেলা শুরু করতে আপনার মোবাইল নম্বর লিখুন।",
+          msisdn_placeholder: "যেমন: 01XXXXXXXXX",
+          cta: "ওটিপি নিন",
+          price_prefix: "BDT",
+          price_suffix: "/ দিন (অটো-রিনিউ)",
+          terms_prefix: "চালিয়ে গেলে আপনি সাবস্ক্রিপশনের শর্তাবলীতে সম্মত হচ্ছেন।",
+          terms_link: "শর্তাবলী",
+          feature_copy:
+            "তাৎক্ষণিকভাবে শত শত গেম খেলুন — আর্কেড, স্ট্র্যাটেজি, অ্যাডভেঞ্চার ও আরও অনেক কিছু।",
+          footer_terms: "সর্বস্বত্ব সংরক্ষিত",
+          footer_copy: "© ২০২৫ গেমসবিট",
+
+          // status messages
+          status_detected: "নম্বর স্বয়ংক্রিয়ভাবে শনাক্ত হয়েছে।",
+          status_enter: "অনুগ্রহ করে আপনার ফোন নম্বর লিখুন।",
+          status_sending: "ওটিপি পাঠানো হচ্ছে…",
+          status_sent: "ওটিপি পাঠানো হয়েছে। রিডাইরেক্ট করা হচ্ছে…",
+          status_fail: "ওটিপি পাঠানো যায়নি। আবার চেষ্টা করুন।"
+        }
+      };
+
+      function setLang(lang) {
+        const dict = I18N[lang] || I18N.en;
+
+        // swap text nodes
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key] != null) el.innerHTML = dict[key];
+        });
+
+        // swap placeholders
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (dict[key] != null) el.setAttribute("placeholder", dict[key]);
+        });
+
+        // store preference
+        try {
+          localStorage.setItem("gb_lang", lang);
+        } catch (_) {}
+      }
+
+      // init language (saved pref > browser)
+      (function initLang() {
+        let lang = "en";
+        try {
+          lang = localStorage.getItem("gb_lang") || lang;
+        } catch (_) {}
+        if (!lang || !I18N[lang]) {
+          const n = (navigator.language || "").toLowerCase();
+          lang = n.startsWith("bn") ? "bn" : "en";
+        }
+        langSel.value = lang;
+        setLang(lang);
+      })();
+
+      langSel.addEventListener("change", () => setLang(langSel.value));
 
       (async () => {
         const auto = await tryHeaderEnrichment();
         if (auto) {
           msisdnInput.value = auto;
-          statusEl.textContent = "Detected number automatically.";
+          const dict = I18N[langSel.value] || I18N.en;
+          statusEl.textContent = dict.status_detected;
           statusEl.classList.add("is-ok");
         }
       })();
 
       cta.addEventListener("click", async () => {
         const msisdn = (msisdnInput.value || "").trim();
+        const dict = I18N[langSel.value] || I18N.en;
 
         if (!msisdn) {
-          statusEl.textContent = "Please enter your phone number.";
+          statusEl.textContent = dict.status_enter;
           statusEl.classList.remove("is-ok");
           statusEl.classList.add("is-err");
           return;
         }
 
-        statusEl.textContent = "Sending OTP…";
+        statusEl.textContent = dict.status_sending;
         statusEl.classList.remove("is-ok", "is-err");
 
         try {
           const res = await triggerOtp(msisdn);
           if (!res.ok) throw new Error("OTP trigger failed");
 
-          statusEl.textContent = "OTP sent. Redirecting…";
+          statusEl.textContent = dict.status_sent;
           statusEl.classList.remove("is-err");
           statusEl.classList.add("is-ok");
 
           setTimeout(() => (window.location.href = res.redirectUrl), 650);
         } catch (e) {
-          statusEl.textContent = "Could not send OTP. Please try again.";
+          statusEl.textContent = dict.status_fail;
           statusEl.classList.remove("is-ok");
           statusEl.classList.add("is-err");
         }
@@ -334,5 +297,15 @@
         setInterval(() => show((idx + 1) % imgs.length), 4500);
       })();
     </script>
+
+    <!-- ✅ tiny helper styles to finish the alignment + fixed feature height
+         (keep in CSS file if you prefer; this is here so HTML works immediately) -->
+    <style>
+      .lp-hero-row { align-items: flex-start !important; }
+      .lp-feature__frame--fixed { height: 540px !important; min-height: 540px !important; }
+      @media (max-width: 991px){
+        .lp-feature__frame--fixed { height: 360px !important; min-height: 360px !important; }
+      }
+    </style>
   </body>
 </html>
